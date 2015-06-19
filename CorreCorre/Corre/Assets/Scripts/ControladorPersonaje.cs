@@ -25,9 +25,9 @@ public class ControladorPersonaje : MonoBehaviour {
 
 	void FixedUpdate(){
 		if (corriendo) {
-			rigidbody2D.velocity = new Vector2(velocidad, rigidbody2D.velocity.y);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(velocidad, GetComponent<Rigidbody2D>().velocity.y);
 		}
-		animator.SetFloat ("VelX", rigidbody2D.velocity.x);
+		animator.SetFloat ("VelX", GetComponent<Rigidbody2D>().velocity.x);
 		enSuelo = Physics2D.OverlapCircle (comprobadorSuelo.position, comprobadorRadio, mascaraSuelo);
 		animator.SetBool ("isGrounded", enSuelo);
 		if (enSuelo == true) {
@@ -39,8 +39,8 @@ public class ControladorPersonaje : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) {
 			if(corriendo){
 				if ((enSuelo == true || !dobleSalto)) {
-					rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,0);
-					rigidbody2D.AddForce(new Vector2(0,fuerzaSalto));
+					GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,0);
+					GetComponent<Rigidbody2D>().AddForce(new Vector2(0,fuerzaSalto));
 					if(dobleSalto == false && !enSuelo){
 						dobleSalto = true;
 					}
